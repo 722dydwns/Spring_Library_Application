@@ -13,6 +13,8 @@ public class CalculatorController {
    public int addTwoNumbers(@RequestParam int num1, @RequestParam int num2){
        return num1 + num2;
    }
+
+
    @GetMapping("/add") //DTO 이것이 Data Transfer Object 이다.
     public int addTwoNum(CalculatorAddRequest request){
        return request.getNum1() + request.getNum2();//이런 식으로 request 객체로 접근하여 바로 반환시킨다.
