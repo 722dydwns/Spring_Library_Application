@@ -7,9 +7,10 @@ import com.group.libraryapp.dto.user.update.UserUpdateRequest;
 import com.group.libraryapp.repository.user.UserRepository;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class UserService {
     //얘는 UserRepository를 사용
     private final UserRepository userRepository;

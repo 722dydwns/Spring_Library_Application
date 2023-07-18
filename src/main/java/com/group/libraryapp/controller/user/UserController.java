@@ -1,30 +1,21 @@
 package com.group.libraryapp.controller.user;
-
-import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
 import com.group.libraryapp.dto.user.update.UserUpdateRequest;
 import com.group.libraryapp.service.user.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController //진입점 등록
 public class UserController {
-
-    //DB연결을 위해
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     //Service객체 주입
     private final UserService userService;
 
     //생성자로 연결
-    public UserController(JdbcTemplate jdbcTemplate){
-        this.jdbcTemplate = jdbcTemplate;//여기서 연결
-        this.userService = new UserService(jdbcTemplate);
+    public UserController(UserService userService){
+        this.userService = userService;
     }
 
     @PostMapping("/user") //리팫토링 시키기

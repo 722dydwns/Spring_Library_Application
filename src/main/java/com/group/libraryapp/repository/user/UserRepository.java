@@ -2,9 +2,10 @@ package com.group.libraryapp.repository.user;
 import com.group.libraryapp.dto.user.response.UserResponse;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class UserRepository {
     //DB에 SQL 날리는 객체, 저장장치에 접근하는 클래스
     private final JdbcTemplate jdbcTemplate;
