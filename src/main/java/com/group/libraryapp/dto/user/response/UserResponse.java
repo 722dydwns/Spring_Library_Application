@@ -13,6 +13,12 @@ public class UserResponse { //응답될 객체 DTO
         this.age = user.getAge();
     }
 
+    public UserResponse(long id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
     public Integer getAge() {
         return age;
     }
