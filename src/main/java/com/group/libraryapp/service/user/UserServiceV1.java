@@ -1,22 +1,20 @@
 package com.group.libraryapp.service.user;
 
-import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
 import com.group.libraryapp.dto.user.update.UserUpdateRequest;
-import com.group.libraryapp.repository.user.UserRepository;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
+import com.group.libraryapp.repository.user.UserJdbcRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserServiceV1 {
     //얘는 UserRepository를 사용
-    private final UserRepository userRepository;
+    private final UserJdbcRepository userJdbcRepository;
 
-    public UserService(JdbcTemplate jdbcTemplate){
-        this.userRepository = new UserRepository(jdbcTemplate);
+    public UserServiceV1(JdbcTemplate jdbcTemplate){
+        this.userJdbcRepository = new UserJdbcRepository(jdbcTemplate);
     }
 
     //실질적인 비즈니스 로직 담당 -Controller에 묶여있던 기능들을
@@ -29,19 +27,19 @@ public class UserService {
             throw new IllegalArgumentException();//예외 던지기
         }
         //sql자겅하여 직접 DB에 접근하는 UserRepository객체의 함수를 여기서 호출
-        userRepository.updateUserName(jdbcTemplate, request.getName(), request.getId());
+        userJdbcRepository.updateUserName(jdbcTemplate, request.getName(), request.getId());
     }
     //삭제 메소드
     public void deleteUser(String name) {
 
-        userRepository.deleteUserByName(name);
+        userJdbcRepository.deleteUserByName(name);
     }
     //저장 메소드
     public void saveUser(UserCreateRequest request) {
-        userRepository.saveUser(request.getName(), request.getAge());
+        userJdbcRepository.saveUser(request.getName(), request.getAge());
     }
-
+    //조회 메소드
     public List<UserResponse> getUsers() {
-        return userRepository.getUserResponses();
+        return userJdbcRepository.getUserResponses();
     }
 }

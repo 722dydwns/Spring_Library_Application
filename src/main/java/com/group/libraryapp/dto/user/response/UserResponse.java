@@ -6,6 +6,12 @@ public class UserResponse { //응답될 객체 DTO
     private long id;
     private String name;
     private Integer age;
+    //생성자
+    public UserResponse(User user){
+        this.id = user.getId();
+        this.name = user.getName();
+        this.age = user.getAge();
+    }
 
     public UserResponse(long id, User user) { //id식별, User(DAO) 로 저장
         this.id = id;
