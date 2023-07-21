@@ -1,8 +1,19 @@
 package com.group.libraryapp.domain.user;
 
+import javax.persistence.*;
+
+@Entity
 public class User { //저장될 데이터 클래스 DAO
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id = null; //추가 (테이블) PK, 자동 증가
+    @Column(nullable = false, length = 20, name = "name")
     private String name;
     private Integer age;
+    //기본 생성자
+    protected User(){}
+
     //생성자로 null검사
     public User(String name , Integer age){
         //검증
