@@ -3,7 +3,8 @@ package com.group.libraryapp.domain.user;
 import javax.persistence.*;
 
 @Entity
-public class User { //저장될 데이터 클래스 DAO
+@Table(name = "person") //매핑시킬 테이블 이름지정
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
