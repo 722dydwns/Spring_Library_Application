@@ -44,5 +44,13 @@ public class UserServiceV2 { //JPA 사용 서비스
         //갱신한 이름을 다시 저장
         userReposiory.save(user);
     }
-
+    //4) 삭제 기능 리팩토링
+    public void deleteUsers(String name){ //이름 기준으로
+        User user = userReposiory.findByName(name);
+        if(user == null){ //널체크 후 예외 던지기
+            throw new IllegalArgumentException();
+        }
+        //이제 얻어온 User를 DB 상에서 삭제처리
+        userReposiory.delete(user);
+    }
 }
