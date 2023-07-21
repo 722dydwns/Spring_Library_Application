@@ -32,4 +32,12 @@ public class User { //저장될 데이터 클래스 DAO
     public String getName() {
         return name;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void updateName(String name){
+        this.name = name;//변경하기
+    }
 }
