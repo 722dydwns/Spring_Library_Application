@@ -3,7 +3,7 @@ package com.group.libraryapp.domain.user;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "person") //매핑시킬 테ㅣㅇ블 이름지정
+@Table(name = "person") //매핑시킬 테이블 이름지정
 public class User {
 
     @Id
