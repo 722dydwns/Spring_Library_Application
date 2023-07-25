@@ -1,10 +1,8 @@
-package com.group.libraryapp.domain.loanhistory;
+package com.group.libraryapp.domain.user.loanhistory;
 
 
-import com.group.libraryapp.domain.book.Book;
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
 
 //jpa 리포지토리 인터페이스
 public interface UserLoanHistoryRepository extends JpaRepository<UserLoanHistory, Long> {

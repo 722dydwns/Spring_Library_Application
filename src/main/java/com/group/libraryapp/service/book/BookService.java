@@ -2,8 +2,8 @@ package com.group.libraryapp.service.book;
 
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.book.BookRepository;
-import com.group.libraryapp.domain.loanhistory.UserLoanHistory;
-import com.group.libraryapp.domain.loanhistory.UserLoanHistoryRepository;
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository;
 import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.domain.user.UserRepository;
 import com.group.libraryapp.dto.book.request.BookCreateRequest;
@@ -39,9 +39,12 @@ public class BookService {
         if(userLoanHistoryRepository.existsByBookNameAndIsReturn(book.getName(), false)) {
             throw new IllegalArgumentException("이미 대출 중인 책입니다.");
         }
-        //대출 기록 쌓기 우해
+        //대출 기록 쌓기 위해 유저 정보, 책 이름 가져와서 만들어야 함
         User user = userRepository.findByName(request.getUserName())
                 .orElseThrow(IllegalArgumentException::new);
-        userLoanHistoryRepository.save(new UserLoanHistory(user.getId(), book.getName()));
+
+        //정보로 대출 기록 저장
+        userLoanHistoryRepository.save(  new UserLoanHistory(user.getId(), book.getName()));
+
     }
 }

@@ -1,4 +1,4 @@
-package com.group.libraryapp.domain.loanhistory;
+package com.group.libraryapp.domain.user.loanhistory;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,13 +17,15 @@ public class UserLoanHistory {  //DB테이블에 매핑될 객체
 
     private boolean isReturn;
 
+    //기본 생성자 필요
     public UserLoanHistory() {
     }
 
     //생성자
-    public UserLoanHistory(Long id, String name) {
-        this.id = id;
-        this.bookName = name;
+    public UserLoanHistory(long userId, String bookName) {
+        this.userId = userId;
+        this.bookName = bookName;
+        this.isReturn = isReturn;
     }
 
 }
