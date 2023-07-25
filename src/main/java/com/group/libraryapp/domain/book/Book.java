@@ -18,4 +18,8 @@ public class Book { //Entity 객체
                 }
                 this.name = name;
         }
+
+        public String getName() {
+                return this.name;
+        }
 }
