@@ -2,16 +2,27 @@ package com.group.libraryapp.service.book;
 
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.book.BookRepository;
+import com.group.libraryapp.domain.loanhistory.UserLoanHistory;
+import com.group.libraryapp.domain.loanhistory.UserLoanHistoryRepository;
+import com.group.libraryapp.domain.user.User;
+import com.group.libraryapp.domain.user.UserRepository;
 import com.group.libraryapp.dto.book.request.BookCreateRequest;
+import com.group.libraryapp.dto.book.request.BookLoanRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookService {
     private final BookRepository bookRepository;
+    //대출 여부 확인용 Repository 의존성 추가
+    private final UserLoanHistoryRepository userLoanHistoryRepository;
+    //userId 가져와야 하기 때문에 의존성 추가
+    private final UserRepository userRepository;
 
-    public BookService(BookRepository bookRepository){
+    public BookService(BookRepository bookRepository, UserLoanHistoryRepository userLoanHistoryRepository, UserRepository userRepository){
         this.bookRepository = bookRepository;
+        this.userLoanHistoryRepository = userLoanHistoryRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -19,4 +30,18 @@ public class BookService {
         bookRepository.save(new Book(request.getName()));
     }
 
+    //책 대여
+    @Transactional
+    public void loanBook(BookLoanRequest request) {
+        //여기서는 Repository 호출
+        Book book = bookRepository.findByName(request.getBookName())
+                .orElseThrow(IllegalArgumentException::new);
+        if(userLoanHistoryRepository.existsByBookNameAndIsReturn(book.getName(), false)) {
+            throw new IllegalArgumentException("이미 대출 중인 책입니다.");
+        }
+        //대출 기록 쌓기 우해
+        User user = userRepository.findByName(request.getUserName())
+                .orElseThrow(IllegalArgumentException::new);
+        userLoanHistoryRepository.save(new UserLoanHistory(user.getId(), book.getName()));
+    }
 }
