@@ -25,7 +25,11 @@ public class UserLoanHistory {  //DB테이블에 매핑될 객체
     public UserLoanHistory(long userId, String bookName) {
         this.userId = userId;
         this.bookName = bookName;
-        this.isReturn = isReturn;
+        this.isReturn = false;
     }
 
+    //반납 처리
+    public void doReturn(){
+        this.isReturn = true;//이제 반납 처리
+    }
 }
