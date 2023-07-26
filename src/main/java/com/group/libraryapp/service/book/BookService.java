@@ -63,4 +63,6 @@ public class BookService {
         //4) 바뀐 객체데이터를 다시 대출 기록에 저장
         userLoanHistoryRepository.save(history); //트랜잭션이 알아서 변경 감지하여 저장해주기 때문에 빼도 된다.
     }
+
+
 }
