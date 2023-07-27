@@ -1,6 +1,10 @@
 package com.group.libraryapp.domain.user;
 
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "person") //매핑시킬 테이블 이름지정
@@ -12,6 +16,12 @@ public class User {
     @Column(nullable = false, length = 20, name = "name")
     private String name;
     private Integer age;
+
+    //여러 개의 UserLoanHistory 갖고있고 싶음
+    //주도권 없는 User 입장에서 mappedBy로 연관관게의 주도권 갖는 객체의 필드 이름을 명시해줘야 한다.
+    @OneToMany (mappedBy = "user") //즉, UserLoanHistory 의 user 필드를 주도궈 있는 애로 명시 - 이 값이 명시되어야 진정한 데이터 저장 가능
+    private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
+
     //기본 생성자
     protected User(){}
 

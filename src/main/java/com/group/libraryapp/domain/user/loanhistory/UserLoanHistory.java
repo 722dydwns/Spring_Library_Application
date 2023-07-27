@@ -1,8 +1,7 @@
 package com.group.libraryapp.domain.user.loanhistory;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.group.libraryapp.domain.user.User;
+
+import javax.persistence.*;
 
 @Entity
 public class UserLoanHistory {  //DB테이블에 매핑될 객체
@@ -11,7 +10,9 @@ public class UserLoanHistory {  //DB테이블에 매핑될 객체
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private long userId;
+    //private long userId;
+    @ManyToOne //연관관계 맺게 하기
+    private User user;
 
     private String bookName;
 
@@ -22,8 +23,8 @@ public class UserLoanHistory {  //DB테이블에 매핑될 객체
     }
 
     //생성자
-    public UserLoanHistory(long userId, String bookName) {
-        this.userId = userId;
+    public UserLoanHistory(User user, String bookName) {
+        this.user = user;
         this.bookName = bookName;
         this.isReturn = false;
     }
