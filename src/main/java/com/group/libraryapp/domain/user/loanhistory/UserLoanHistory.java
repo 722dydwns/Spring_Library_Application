@@ -33,4 +33,8 @@ public class UserLoanHistory {  //DB테이블에 매핑될 객체
     public void doReturn(){
         this.isReturn = true;//이제 반납 처리
     }
+
+    public String getBookName() {
+        return bookName;
+    }
 }
