@@ -54,6 +54,7 @@ public class BookService {
     public void returnBook(BookReturnRequest request){
         User user = userRepository.findByName(request.getUserName()).orElseThrow(IllegalArgumentException::new);
 
+        System.out.println("Hello ");
         user.returnBook(request.getBookName()); //간단하게 반납처리 된다.
     }
 
